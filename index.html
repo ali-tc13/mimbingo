@@ -116,7 +116,7 @@
 
   <div id="bingo-grid" class="bingo-board"></div>
 
-  <a href="https://www.melanatedinmelbourne.com/" target="_blank" class="mim-button">🌐 Visit Melanated in Melbourne</a>
+  <a href="https://www.melanatedinmelbourne.com/" class="mim-button">🌐 Visit Melanated in Melbourne</a>
 
   <div id="reward" class="reward">
     🎉 Bingo! You’ve completed a Tap In line — show this to a host for your reward.
@@ -164,7 +164,7 @@
       tag1: { label: 'Song of the Week', prompt: 'Ask someone what their “song of the week” is and tell them yours.' },
       tag2: { label: 'Meet Someone New', prompt: 'Find someone you haven’t met yet and ask what brought them here tonight.' },
       tag3: { label: 'Black and Better Than Ever', prompt: 'What does being your best self look like — even when the world doesn’t expect it from you?', episodeUrl: 'https://youtu.be/58VMtwM_sdI?si=_UFEiYV1GHHw1yMS' },
-      tag4: { label: 'Compliment Swap', prompt: 'Swap compliments with a stranger - one genuine thing each.' },
+      tag4: { label: 'Nicole', prompt: 'Congrats! you found a host tag.' },
       tag5: { label: 'Laugh Together', prompt: 'Find someone laughing and ask what made them laugh tonight.' },
       tag6: { label: 'Share a Goal', prompt: 'Tell someone about a goal you’re working toward — big or small.' },
       tag7: { label: 'Ri\'Chard', prompt: 'Congrats! You found a host tag.' },
@@ -180,12 +180,7 @@
       tag17: { label: 'What Brings You Joy?', prompt: 'Ask someone: “What’s been bringing you joy lately?”' },
       tag18: { label: 'Siki From the Block', prompt: 'What part of your younger self still lives in you now?', episodeUrl: 'https://youtu.be/QPbaF4X4w1g?si=c6xBObFhpGkcF1Tg' },
       tag19: { label: 'Deep Breath', prompt: 'Pause. Take one deep breath — remind yourself you belong here.' },
-      tag20: { label: 'Reflect & Share', prompt: 'Think about your younger self. What’s one thing you’d tell them now?' },
-      tag21: { label: 'Selfie Tag', prompt: 'With someone new, take a selfie and call it your “Episode 1 cover art.”' },
-      tag22: { label: 'Connection Tap', prompt: 'Tap this after meeting someone new — you both just earned a connection point.' },
-      tag23: { label: 'Free Space', prompt: 'You’re already glowing — this one’s a freebie!' },
-      tag24: { label: 'Proud Moment', prompt: 'Tell someone one thing you’re proud of yourself for this year.' },
-      tag25: { label: 'Find Your Way Back', prompt: 'When was the last time you reconnected with something that once made you happy?', episodeUrl: 'https://youtu.be/rJr2qPOjApE?si=MjKcM6s7vJHC7dGB' },
+      tag20: { label: 'Find Your Way Back', prompt: 'When was the last time you reconnected with something that once made you happy?', episodeUrl: 'https://youtu.be/rJr2qPOjApE?si=MjKcM6s7vJHC7dGB' },
       mim_home: { label: 'Melanated in Melbourne', prompt: 'Tap to visit our official site and explore more stories, events, and episodes.', episodeUrl: 'https://www.melanatedinmelbourne.com/' }
     };
 
@@ -232,8 +227,9 @@
         const label = cfg.episodeUrl
           ? '🎧 Listen'
           : (cfg.formUrl ? '📝 Open Form' : '🌐 Visit');
+        const openInNewTab = (cfg.episodeUrl || cfg.formUrl) ? 'target="_blank"' : '';
         html += `
-          <a href="${link}" target="_blank" rel="noopener noreferrer"
+          <a href="${link}" ${openInNewTab} rel="noopener noreferrer"
           style="display:inline-block;margin-top:10px;padding:8px 14px;border-radius:999px;
           background:#ffca28;color:#3e2723;font-weight:600;font-size:0.85rem;text-decoration:none;">
           ${label}
