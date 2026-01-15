@@ -57,7 +57,7 @@
   /* 4x4 grid, fixed layout */
   .bingo-board {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 8px;
     width: min(90vw, 450px);
     margin-bottom: 14px;
@@ -149,7 +149,7 @@ const playerName=getPlayerName();
 function sendLog(p){try{fetch(TRACKING_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({...p,playerName})});}catch(e){}}
 
 const ALL_TAGS={
-tag1:{label:'Volunteer',prompt:'Congrats! You found a volunteer tag. If you\'re interested in volunteering too, fill out this form',formurl:'https://forms.gle/Jy1NpRKfEQb8oMUh6'},
+tag1:{label:'Volunteer',prompt:'Congrats! You found a volunteer tag.'},
 tag2:{label:'Meet Someone New',prompt:'Congrats! You found a newbie tag.'},
 tag3:{label:'Black and Better Than Ever',prompt:'What does being your best self look like — even when the world doesn’t expect it from you?',episodeUrl:'https://youtu.be/58VMtwM_sdI?si=_UFEiYV1GHHw1yMS'},
 tag4:{label:'Nicole',prompt:'Congrats! you found a host tag.'},
