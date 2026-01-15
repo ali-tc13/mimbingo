@@ -52,7 +52,7 @@
     margin-bottom: 14px;
   }
 
-  /* ✅ 3x3 grid */
+  /* 3x3 grid */
   .bingo-board {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -130,7 +130,7 @@
 (function(){
 const TRACKING_URL = 'https://script.google.com/macros/s/AKfycbw_sb0oc3qbJag8lU4g7tHWsWjdWZ9iUaoCtyyjZNn0H0Muurt92DOmT_RdjPVArW6nbw/exec';
 
-/* --- stable player identity --- */
+/* stable player identity */
 function getPlayerName(){
   let n = localStorage.getItem('mim_player_name');
   if(!n){
@@ -166,7 +166,7 @@ function sendLog(p){
   }catch(e){}
 }
 
-/* --- tags --- */
+/* tags */
 const ALL_TAGS={
 tag1:{label:'Volunteer',prompt:'Congrats! You found a volunteer tag.'},
 tag2:{label:'Meet Someone New',prompt:'Congrats! You found a newbie tag.'},
@@ -185,15 +185,13 @@ tag14:{label:'Siki From the Block',prompt:'What part of your younger self lives 
 tag15:{label:'Find Your Way Back',prompt:'When did you last reconnect with joy?',episodeUrl:'https://youtu.be/rJr2qPOjApE'}
 };
 
-/* --- 3x3 STATE --- */
-const STORAGE_KEY='mim_bingo_v7_3x3';
+/* 3x3 state */
+const STORAGE_KEY='mim_bingo_v8_3x3';
 let state=JSON.parse(localStorage.getItem(STORAGE_KEY)||'{"collected":[],"layout":[],"bingoLogged":false}');
 const allKeys=Object.keys(ALL_TAGS);
 
 if(!state.layout || state.layout.length!==9){
-  const pinned='mim_home';
-  const random=shuffle(allKeys.filter(k=>k!==pinned)).slice(0,8);
-  state.layout=[...random,pinned];
+  state.layout = shuffle(allKeys).slice(0,9);
   state.collected=[];
   state.bingoLogged=false;
   localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
@@ -203,7 +201,7 @@ if(!state.layout || state.layout.length!==9){
 const TAGS={};
 state.layout.forEach(k=>TAGS[k]=ALL_TAGS[k]);
 
-/* --- scan handling --- */
+/* scan handling */
 const params=new URLSearchParams(window.location.search);
 const tagParam=(params.get('tag')||'').trim();
 const messageEl=document.getElementById('message');
@@ -230,7 +228,7 @@ if(tagParam && TAGS[tagParam]){
 renderBoard();
 checkBingo();
 
-/* --- render --- */
+/* render */
 function renderBoard(){
   grid.innerHTML='';
   grid.style.gridTemplateColumns='repeat(3,1fr)';
@@ -242,7 +240,7 @@ function renderBoard(){
   });
 }
 
-/* --- bingo logic (3x3) --- */
+/* bingo logic */
 function checkBingo(){
   const f=state.collected;
   const ids=Object.keys(TAGS);
