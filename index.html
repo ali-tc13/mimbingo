@@ -208,26 +208,38 @@ const messageEl=document.getElementById('message');
 const grid=document.getElementById('bingo-grid');
 const reward=document.getElementById('reward');
 
-if(tagParam && TAGS[tagParam]){
-  if(!state.collected.includes(tagParam)){
-    state.collected.push(tagParam);
-    localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
-    sendLog({event:'tag_unlocked',tagId:tagParam});
-  }
-  const cfg=TAGS[tagParam];
-  let html=`<strong>✅ You unlocked: ${cfg.label}</strong><br>${cfg.prompt}`;
-  if(cfg.episodeUrl||cfg.formUrl){
-    const link=cfg.episodeUrl||cfg.formUrl;
-    html+=`<br><a href="${link}" target="_blank" class="mim-button">Open</a>`;
-  }
-  messageEl.innerHTML=html;
-} else {
+/* scan handling */
+const params = new URLSearchParams(window.location.search);
+const tagParam = (params.get('tag') || '').trim();
+const messageEl = document.getElementById('message');
+const grid = document.getElementById('bingo-grid');
+const reward = document.getElementById('reward');
+
+if (tagParam) {
+  if (TAGS[tagParam]) {
+    if (!state.collected.includes(tagParam)) {
+      state.collected.push(tagParam);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      sendLog({ event: 'tag_unlocked', tagId: tagParam });
+    }
+
+    const cfg = TAGS[tagParam];
+    let html = `<strong>✅ You unlocked: ${cfg.label}</strong><br>${cfg.prompt}`;
+
+    if (cfg.episodeUrl || cfg.formUrl) {
+      const link = cfg.episodeUrl || cfg.formUrl;
+      html += `<br><a href="${link}" target="_blank" class="mim-button">Open</a>`;
+    }
+
+    messageEl.innerHTML = html;
+  } else {
     messageEl.innerHTML =
-      `<strong>Not on your board, that’s okay!</strong><br>` +
+      `<strong>Not on your board — that’s okay!</strong><br>` +
       `Say hello to someone nearby and keep exploring.`;
+    sendLog({ event: 'tag_not_on_board', tagId: tagParam });
   }
- else {
-  messageEl.textContent='Tap a tag to fill your 3×3 Bingo board!';
+} else {
+  messageEl.textContent = 'Tap a tag to fill your 3×3 Bingo board!';
 }
 
 renderBoard();
