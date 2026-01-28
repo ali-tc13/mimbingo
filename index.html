@@ -202,6 +202,7 @@ const TAGS={};
 state.layout.forEach(k=>TAGS[k]=ALL_TAGS[k]);
 
 /* scan handling */
+/* scan handling */
 const params = new URLSearchParams(window.location.search);
 const tagParam = (params.get('tag') || '').trim();
 const messageEl = document.getElementById('message');
@@ -224,9 +225,17 @@ if (tagParam) {
       html += `<br><a href="${link}" target="_blank" class="mim-button">Open</a>`;
     }
 
+    messageEl.innerHTML = html;
+  } else {
+    messageEl.innerHTML =
+      `<strong>Not on your board — that’s okay!</strong><br>` +
+      `Say hello to someone nearby and keep exploring.`;
+    sendLog({ event: 'tag_not_on_board', tagId: tagParam });
+  }
 } else {
   messageEl.textContent = 'Tap a tag to fill your 3×3 Bingo board!';
 }
+
 
 renderBoard();
 checkBingo();
