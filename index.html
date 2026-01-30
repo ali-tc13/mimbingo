@@ -92,15 +92,21 @@
     box-shadow: 0 0 10px rgba(255, 213, 79, 0.5);
   }
 
-  .reward {
-    display: none;
-    border: 1px solid var(--mim-gold-soft);
-    border-radius: 12px;
-    background: rgba(255, 214, 79, 0.1);
-    color: var(--mim-gold);
-    padding: 14px;
-    text-align: center;
-  }
+.reward {
+  display: none;
+
+  /* pin near top */
+  position: sticky;
+  top: 10px;
+  z-index: 10;
+  border: 1px solid var(--mim-gold-soft);
+  border-radius: 12px;
+  background: rgba(255, 214, 79, 0.1);
+  color: var(--mim-gold);
+  padding: 14px;
+  text-align: center;
+  margin: 10px auto;
+}
 
   .mim-button {
     margin-top: 16px;
